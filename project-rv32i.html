@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISC-V Core | Toby Wright</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="sticky-nav-wrapper">
+        <nav class="top-nav container">
+            <div class="logo">TW.</div>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#blog">Blog</a>
+                <a href="https://github.com/tobywr" target="_blank">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <header class="page-header">
+            <a href="index.html#projects" class="back-link">&larr; Back to Main Page</a>
+            <h1>RISC-V 32I Core</h1>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">SystemVerilog</span>
+                <span class="tech-tag">RV32I</span>
+                <span class="tech-tag">ModelSim</span>
+            </div>
+            
+            <a href="https://github.com/tobywr/RISCV32I" target="_blank" class="github-link">
+                View Source Code on GitHub &rarr;
+            </a>
+        </header>
+
+        <article class="project-content">
+            <div class="project-image">
+                <img src="img/RV32I_schem.png" alt="Block diagram for RV32I">
+            </div>
+
+            <h2>Overview</h2>
+            <p>This project involved designing a single-cycle RISC-V 32I processor from scratch using SystemVerilog. The core includes 32 general-purpose registers, a complete 32-bit datapath, and has 10 core operations implemented.</p>
+            
+            <h2>Instruction Set Architecture (Subset)</h2>
+            <div class="table-responsive">
+                <table class="isa-table">
+                    <thead>
+                        <tr>
+                            <th>Instruction</th>
+                            <th>Type</th>
+                            <th style="width: 45%;">Exact Data Structure (Bits [31:0])</th>
+                            <th>RTL Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ADD</strong></td>
+                            <td>R-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 7;">0000000<br><small>funct7</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs2<br><small>src2</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>src1</small></span>
+                                    <span class="bit-field" style="flex: 3;">000<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">0110011<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = R[rs1] + R[rs2]</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>SUB</strong></td>
+                            <td>R-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 7;">0100000<br><small>funct7</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs2<br><small>src2</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>src1</small></span>
+                                    <span class="bit-field" style="flex: 3;">000<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">0110011<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = R[rs1] - R[rs2]</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>AND</strong></td>
+                            <td>R-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 7;">0000000<br><small>funct7</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs2<br><small>src2</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>src1</small></span>
+                                    <span class="bit-field" style="flex: 3;">111<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">0110011<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = R[rs1] & R[rs2]</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>ADDI</strong></td>
+                            <td>I-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 12;">imm[11:0]<br><small>imm (12)</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>src1</small></span>
+                                    <span class="bit-field" style="flex: 3;">000<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">0010011<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = R[rs1] + imm</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>LW</strong></td>
+                            <td>I-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 12;">imm[11:0]<br><small>offset (12)</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>base</small></span>
+                                    <span class="bit-field" style="flex: 3;">010<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">0000011<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = M[R[rs1] + imm]</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>SW</strong></td>
+                            <td>S-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 7;">imm[11:5]<br><small>imm (7)</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs2<br><small>src</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>base</small></span>
+                                    <span class="bit-field" style="flex: 3;">010<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">imm[4:0]<br><small>imm (5)</small></span>
+                                    <span class="bit-field" style="flex: 7;">0100011<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>M[R[rs1] + imm] = R[rs2]</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>BEQ</strong></td>
+                            <td>B-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 7;">imm[12|10:5]<br><small>imm (7)</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs2<br><small>src2</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>src1</small></span>
+                                    <span class="bit-field" style="flex: 3;">000<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">imm[4:1|11]<br><small>imm (5)</small></span>
+                                    <span class="bit-field" style="flex: 7;">1100011<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>if(rs1==rs2) PC += imm</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>JAL</strong></td>
+                            <td>J-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 20;">imm[20|10:1|11|19:12]<br><small>imm (20)</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">1101111<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = PC+4; PC += imm</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>JALR</strong></td>
+                            <td>I-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 12;">imm[11:0]<br><small>imm (12)</small></span>
+                                    <span class="bit-field" style="flex: 5;">rs1<br><small>base</small></span>
+                                    <span class="bit-field" style="flex: 3;">000<br><small>funct3</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">1100111<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = PC+4; PC=R[rs1]+imm</code></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>LUI</strong></td>
+                            <td>U-Type</td>
+                            <td>
+                                <div class="bit-format">
+                                    <span class="bit-field" style="flex: 20;">imm[31:12]<br><small>imm (20)</small></span>
+                                    <span class="bit-field" style="flex: 5;">rd<br><small>dest</small></span>
+                                    <span class="bit-field" style="flex: 7;">0110111<br><small>opcode</small></span>
+                                </div>
+                            </td>
+                            <td><code>R[rd] = {imm, 12'b0}</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Verification & Testing</h2>
+            <p></p>
+            
+            <h2>Challanges & Takeaways</h2>
+            <p></p>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Toby Wright.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

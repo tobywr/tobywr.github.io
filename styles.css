@@ -1,9 +1,466 @@
+/* Color Palette */
+:root {
+    --bg-color: #F6F1F1;
+    --card-bg: #ffffff;
+    --text-main: #2b3a42;
+    --text-heading: #146C94;
+    --accent-cyan: #19A7CE;
+    --border-soft: #AFD3E2;
+}
+
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color:black;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* WIDER CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Typography */
+h1 {
+    font-size: 3.5rem; /* Larger Name */
+    color: var(--text-heading);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: var(--text-heading);
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 1.3rem;
+    color: var(--text-heading);
+}
+
+a {
+    color: var(--text-heading);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-cyan);
+}
+
+
+
+/* Sticky Navigation */
+.sticky-nav-wrapper {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-color); /* Matches the page background */
+    z-index: 1000;                     /* Keeps it above all other content */
+    /* border-bottom: 1px solid var(--border-soft);  Clean line when scrolling */
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-heading);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    font-weight: 500;
+}
+
+/* Spacious Hero Section */
+.hero-section {
+    padding: 8rem 0 6rem 0; /* Huge padding for the landing page feel */
+    max-width: 100%; /* Keeps the text from stretching too wide on massive monitors */
+}
+
+/* --- Hero Graphic (RTL/PCB Routing) --- */
+.hero-graphic {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 3rem; /* Pushes the 'hi, i'm' text down nicely */
+    opacity: 0.85; /* Keeps it slightly muted so text remains the focus */
+    
+    /* This creates a smooth fade-out effect on the left and right edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.hero-graphic svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Update to the hero section padding to accommodate the new graphic */
+.hero-section {
+    padding: 4rem 0 6rem 0; /* Reduced top padding slightly since the graphic fills the void */
+    max-width: 100%;
+}
+
+.hero-text {
+    max-width: 800px;
+}
+
+.greeting {
+    font-size: 1.2rem;
+    color: var(--text-main);
+    opacity: 0.8; /* Gives it that subtle, muted look */
+    font-weight: normal; 
+    margin-bottom: 0.5rem;
+}
+.subtitle {
+    margin-bottom: 2rem;
+    color: var(--text-main);
+}
+
+.bio {
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 6rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-soft);
+}
+
+/* Larger Flat Grid Cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Wider columns */
+    gap: 2rem; /* More space between boxes */
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 2rem; /* More padding inside the boxes */
+    transition: border-color 0.2s ease;
+}
+
+.card:hover {
+    border-color: var(--accent-cyan);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.arrow-link {
+    color: var(--border-soft);
+    font-size: 1.4rem;
+}
+
+.card:hover .arrow-link {
+    color: var(--accent-cyan);
+}
+
+/* Subtle Tech Tags */
+.tech-stack {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.tech-tag {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-soft);
+    color: var(--text-heading);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* Blog List Layout */
+.blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.blog-item {
+    display: flex;
+    gap: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.blog-item .date {
+    min-width: 120px;
+    font-family: monospace;
+    color: var(--text-heading);
+    font-size: 1rem;
+    padding-top: 0.2rem;
+}
+
+.blog-item h3 {
+    margin-bottom: 0.5rem;
+}
+
+.blog-item p {
+    font-size: 1.05rem;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 3rem 0;
+    margin-top: 4rem;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .hero-section { padding: 4rem 0; }
+    h1 { font-size: 2.8rem; }
+    .grid { grid-template-columns: 1fr; }
+    .blog-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Project and Blogs formatting */
+
+/* Shared Page Headers */
+.page-header {
+    padding: 4rem 0 2rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    color: var(--accent-cyan);
+}
+
+/* --- Project Page Layout (Full Width) --- */
+.github-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    font-size: 1.1rem;
+}
+
+.github-link:hover {
+    text-decoration: underline; /* Simple, classic hover state */
+}
+
+.project-content {
+    margin-bottom: 6rem;
+    /* It will naturally take up the width of the 1100px container now */
+}
+
+.project-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    max-width: 100%; /* Keeps text from stretching so wide it becomes hard to read */
+}
+
+.project-content h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    border: none; 
+    padding-bottom: 0;
+}
+
+.project-image {
+    width: 100%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--border-soft);
+    margin-bottom: 3rem;
+    overflow: hidden; /* Add this: keeps the image strictly inside the rounded corners */
+}
+
+.project-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* 'contain' ensures the whole diagram is visible without cropping */
+    padding: 1rem;       /* Gives the diagram a little breathing room from the border */
+}
+
+/* --- ISA Table Formatting --- */
+.table-responsive {
+    overflow-x: auto; /* Allows scrolling on mobile if the table is too wide */
+    margin-bottom: 2.5rem;
+}
+
+.isa-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
     text-align: left;
-    padding-left: 40%;
-    padding-top: 10%;
-    font-size: 25px;
-    color:#20C20E;
+}
+
+.isa-table th {
+    background-color: var(--card-bg);
+    color: var(--text-heading);
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-soft);
+    font-weight: 600;
+}
+
+.isa-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.isa-table code {
+    font-family: monospace;
+    background-color: var(--card-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-soft);
+    color: var(--text-heading);
+}
+
+/* --- The Flexbox Instruction Visualizer --- */
+.bit-format {
+    display: flex;
+    text-align: center;
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    overflow: hidden; /* Keeps the inside borders neat */
+    background-color: var(--card-bg);
+}
+
+.bit-field {
+    border-right: 1px solid var(--border-soft);
+    padding: 0.4rem 0.2rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    line-height: 1.3;
+    /* 'flex' is defined inline in the HTML based on bit-width! */
+}
+
+.bit-field:last-child {
+    border-right: none;
+}
+
+.bit-field small {
+    display: block;
+    color: var(--accent-cyan);
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+}
+
+/* --- Blog Page Layout --- */
+.blog-header {
+    max-width: 750px;
+    margin: 0 auto 3rem auto;
+    border-bottom: none; /* Clean transition into text */
+}
+
+.post-date {
+    display: block;
+    font-family: monospace;
+    color: var(--accent-cyan);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.blog-article {
+    max-width: 750px; /* Constrains line length for optimal reading */
+    margin: 0 auto 6rem auto;
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.blog-article p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-article h2 {
+    margin-top: 3rem;
+    border: none;
+}
+
+.pull-quote {
+    border-left: 4px solid var(--accent-cyan);
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2.5rem 0;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--text-heading);
+    background-color: var(--card-bg); /* Slight background to highlight */
+}
+
+.code-snippet {
+    background-color: #1a202c; /* Dark background for code readability */
+    color: #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin: 2rem 0;
+    overflow-x: auto;
+}
+
+.code-snippet pre {
+    margin: 0;
+}
+
+.code-snippet code {
+    font-family: monospace;
+    font-size: 0.95rem;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .project-layout {
+        grid-template-columns: 1fr; /* Stacks image and specs vertically */
+        gap: 2rem;
+    }
 }

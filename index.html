@@ -1,17 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, intiial-scale=1.0">
-        <title>Toby Wright</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toby Wright | Electronic Engineering</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    
+
+    <header class="sticky-nav-wrapper">
+        <nav class="top-nav container">
+            <div class="logo">TW.</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#blog">Blog</a>
+                <a href="https://github.com/tobywr" target="_blank">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <header id="about" class="hero-section">
+            <div class="hero-text">
+                <p class="greeting">Hi, i'm</p>
+                <h1>Toby Wright</h1>
+                <h2 class="subtitle">Electronic Engineering Student</h2>
+                <p class="bio">
+                    I'm a 2nd-year university student passionate about Digital design and verification - with a focus on IC Design and FPGA engineering in SystemVerilog.
+                </p>
+            </div>
+        </header>
+
+        <section id="projects" class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><a href="project-rv32i.html">RISC-V Core</a></h3>
+                        <a href="project-rv32i.html" class="arrow-link">&rarr;</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">SystemVerilog</span>
+                        <span class="tech-tag">RV32I</span>
+                    </div>
+                    <p>RISC-V 32I single cycle processor with 32 general purpose registers and a 32-bit datapath. Designed and verified in SystemVerilog.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><a href="project-adc.html">SAR ADC</a></h3>
+                        <a href="project-adc.html" class="arrow-link">&rarr;</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">SystemVerilog</span>
+                        <span class="tech-tag">OOP / CRV</span>
+                    </div>
+                    <p>Successive approximation register analog-to-digital convertor in SystemVerilog, with a CRV OOP test environment for boundary-condition testing.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><a href="project-log-file-parser.html">Log File Parser</a></h3>
+                        <a href="project-log-file-parser.html" class="arrow-link">&rarr;</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <p>Log file parser, designed to extract erros, warnings and timing analysis from Vivado simulation / synthesis log files.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><a href="project-fpga-uart-debugger.html">FPGA UART debugger</a></h3>
+                        <a href="project-fpga-uart-debugger.html" class="arrow-link">&rarr;</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">SystemVerilog</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">UART</span>
+                    </div>
+                    <p>A register debugger for viewing / editing register values on an FPGA over uart using a python CLI.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="section">
+            <h2 class="section-title">Blog Posts</h2>
+            
+            <div class="blog-list">
+                <div class="blog-item">
+                    <span class="date">Oct 12, 2026</span>
+                    <div class="blog-content">
+                        <h3><a href="blog-UVM.html">How I Learnt UVM : A Practical guide</a></h3>
+                        <p>An overview of how I approached learning the UVM concepts and frameworks in a more applied, practical manor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="container">
-            <p>> Welcome to my portfolio!</p>
-            <p>> Site is currently under construction.</p>
-            <p>> Why are you even here?</p>
-            <p>> How did you find this?</p>
+            <p>&copy; 2026 Toby Wright.</p>
         </div>
-    </body>
+    </footer>
+
+</body>
 </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> How I Learnt UVM | Toby Wright</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="sticky-nav-wrapper">
+        <nav class="top-nav container">
+            <div class="logo">TW.</div>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#blog">Blog</a>
+                <a href="https://github.com/tobywr" target="_blank">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <header class="page-header blog-header">
+            <a href="index.html#blog" class="back-link">&larr; Back to Main Page</a>
+            <span class="post-date">October 12, 2026</span>
+            <h1>How I Learnt UVM : A Practical guide</h1>
+        </header>
+
+        <article class="blog-article">
+            <p>Verifcation lies at the core of designing and packaging RTL designs, whether IPs or physical chips. UVM lies at the heart of this, being one of the main formal verification methodologies utilized in industry. This aims to provide an introduction to those starting out from my own experiences.</p>
+            
+            <h2>The Limitations of 8-bit</h2>
+            <p>When I started building my custom synthesizer, I realized the ATmega328P simply didn't have the processing power or the ADC resolution I needed for high-fidelity audio.</p>
+            
+            <blockquote class="pull-quote">
+                "Transitioning to ARM Cortex-M architecture felt like taking off training wheels. It was daunting, but the control it afforded was unparalleled."
+            </blockquote>
+
+            <h2>Setting up the Toolchain</h2>
+            <p>Instead of relying on the Arduino IDE, I moved to STM32CubeIDE. Here is a quick example of how setting up a GPIO pin looks radically different when manipulating the registers directly:</p>
+
+            <div class="code-snippet">
+                <pre><code>// Enabling GPIOA clock
+RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+
+// Setting PA5 as output
+GPIOA->MODER |= GPIO_MODER_MODER5_0;
+GPIOA->MODER &= ~GPIO_MODER_MODER5_1;</code></pre>
+            </div>
+            
+            <p>It requires more boilerplate, but understanding the hardware at this level is exactly what I am at university to learn.</p>
+        </article>
+        <div class="comment-section" style="max-width: 750px; margin: 0 auto 4rem auto;">
+            <script src="https://giscus.app/client.js"
+            data-repo="tobywr/tobywr.github.io"
+            data-repo-id="R_kgDOQmS4Yg"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOQmS4Ys4C49aS"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="light"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+            </script>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Toby Wright.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
